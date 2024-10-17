@@ -24,11 +24,11 @@ const std::map<std::pair<std::string, std::string>, std::string> ACTION_MAP = {
     {{"CLOSE_WAIT", "APP_CLOSE"}, "LAST_ACK"},
     {{"LAST_ACK", "RCV_ACK"}, "CLOSED"}};
 
-std::string traverse_TCP_states(const std::vector<std::string> &events) {
+std::string traverse_tcp_states(const std::vector<std::string> &events) {
     std::string state = "CLOSED";
     
     for (const auto &event : events) {
-        auto it = ACTION_MAP.find({state, event});
+        const auto it = ACTION_MAP.find({state, event});
         if (it != ACTION_MAP.end())
             state = it->second;
         else
