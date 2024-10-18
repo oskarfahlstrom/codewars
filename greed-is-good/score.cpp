@@ -23,10 +23,9 @@ int score(const std::vector<int>& dice) {
             if (it != SCORE_MAP.end()) {
                 result += it->second;
                 count -= lookup;
-            } else {
+            } else
                 count--;
-            }
-        }   
+        }
     }
     return result;
 }
