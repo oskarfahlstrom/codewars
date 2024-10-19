@@ -1,6 +1,7 @@
 #include <string>
 #include <vector>
 #include <map>
+#include <assert.h>
 
 const std::map<std::pair<std::string, std::string>, std::string> ACTION_MAP = {
     {{"CLOSED", "APP_PASSIVE_OPEN"}, "LISTEN"},
@@ -36,4 +37,13 @@ std::string traverse_tcp_states(const std::vector<std::string> &events) {
     }
     
     return state;
+}
+
+int main() {
+    assert(traverse_tcp_states({"APP_ACTIVE_OPEN","RCV_SYN_ACK","RCV_FIN"}) == "CLOSE_WAIT");
+    assert(traverse_tcp_states({"APP_PASSIVE_OPEN","RCV_SYN","RCV_ACK"}) == "ESTABLISHED");
+    assert(traverse_tcp_states({"APP_ACTIVE_OPEN","RCV_SYN_ACK","RCV_FIN","APP_CLOSE"}) == "LAST_ACK");
+    assert(traverse_tcp_states({"APP_ACTIVE_OPEN"}) == "SYN_SENT");
+    assert(traverse_tcp_states({"APP_PASSIVE_OPEN","RCV_SYN","RCV_ACK","APP_CLOSE","APP_SEND"}) == "ERROR");
+    return 0;
 }
