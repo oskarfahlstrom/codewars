@@ -1,16 +1,16 @@
 #include <vector>
 #include <assert.h>
 
-long determinant(const std::vector<std::vector<long>>& matrix) {
-    int dim = matrix.size();
+long determinant(const std::vector<std::vector<long>>& m) {
+    int dim = m.size();
 
     if (dim == 1) 
-        return matrix[0][0];
+        return m[0][0];
     if (dim == 2)
-        return matrix[0][0] * matrix[1][1] - matrix[0][1] * matrix[1][0];
+        return m[0][0] * m[1][1] - m[0][1] * m[1][0];
 
     long det = 0;
-    std::vector<std::vector<long>> submatrix(dim - 1, std::vector<long>(dim - 1));
+    std::vector<std::vector<long>> sub(dim - 1, std::vector<long>(dim - 1));
 
     for (int x = 0; x < dim; x++) {
         for (int i = 1; i < dim; i++) {
@@ -18,13 +18,13 @@ long determinant(const std::vector<std::vector<long>>& matrix) {
             for (int j = 0; j < dim; j++) {
                 if (j == x)
                     continue;
-                submatrix[i - 1][sub_j] = matrix[i][j];
+                sub[i - 1][sub_j] = m[i][j];
                 sub_j++;
             }
         }
 
-        long sub_det = determinant(submatrix);
-        det += (x % 2 == 0 ? 1 : -1) * matrix[0][x] * sub_det;
+        long sub_det = determinant(sub);
+        det += (x % 2 == 0 ? 1 : -1) * m[0][x] * sub_det;
     }
     return det;
 }
