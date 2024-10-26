@@ -26,3 +26,12 @@ class VigenereCipher(object):
                 (len(self.alphabet) + index - self.alphabet.find(
                     self.key[i % len(self.key)])) % len(self.alphabet)]
         return string
+
+
+if __name__ == '__main__':
+    alphabet = 'abcdefghijklmnopqrstuvwxyz'
+    key = 'password'
+    vc = VigenereCipher(alphabet=alphabet, key=key)
+    words = ['codewards', 'CODEWARS', 'testword']
+    for word in words:
+        assert vc.decode(vc.encode(word)) == word
