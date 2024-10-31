@@ -1,35 +1,28 @@
-from collections import deque
-
-
 DIRECTIONS = [(-1, 0), (1, 0), (0, -1), (0, 1)]
 
 
-def string_to_matrix(s: str, n: int):
+def string_to_matrix(s: str):
     """Convert the string representation to a 2D matrix."""
-    return [list(s[i*n:(i+1)*n]) for i in range(n)]
+    return list(map(list, s.splitlines()))
 
 
-def path_finder(maze: str):
-    """Perform BFS to check if there's a path from (0, 0) to (n-1, n-1)."""
-    n = len(maze.split('\n'))
-    matrix = string_to_matrix(maze.replace('\n', ''), n)
-    
-    queue = deque([(0, 0)])  # starting point
-    visited = set()
-    visited.add((0, 0))
+
+def path_finder(s: str):
+    """Perform search to check if there's a path from (0, 0) to (n-1, n-1)."""
+    matrix, queue = string_to_matrix(s), [(0, 0)]
+    n = len(matrix)
     
     while queue:
-        x, y = queue.popleft()
+        x, y = queue.pop()  # swap to pop(0) to use DFS instead of BFS
+        matrix[x][y] = 'X'  # mark as visited
         
-        if (x, y) == (n-1, n-1):  # goal
+        if (x, y) == (n-1, n-1):
             return True
         
         for dx, dy in DIRECTIONS:
             nx, ny = x + dx, y + dy
-            if 0 <= nx < n and 0 <= ny < n and (nx, ny) not in visited:
-                if matrix[nx][ny] == '.':
-                    queue.append((nx, ny))
-                    visited.add((nx, ny))
+            if 0 <= nx < n and 0 <= ny < n and (nx, ny) and matrix[nx][ny] == '.':
+                queue.append((nx, ny))
     
     return False
 
