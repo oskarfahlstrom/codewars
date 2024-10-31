@@ -8,7 +8,7 @@ def path_finder(s: str):
     n = len(matrix)
     
     while queue:
-        x, y = queue.pop()  # swap to pop(0) to use BFS instead of DFS
+        x, y = queue.pop()  # DFS search using pop()
         matrix[x][y] = 'X'  # mark as visited
         
         if (x, y) == (n-1, n-1):
