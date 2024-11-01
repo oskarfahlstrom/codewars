@@ -15,7 +15,7 @@ def path_finder(s: str) -> int | bool:
         
         for dx, dy in [(-1, 0), (1, 0), (0, -1), (0, 1)]:
             nx, ny = x + dx, y + dy
-            if not (0 <= nx < n and 0 <= ny < n and (nx, ny) and matrix[nx][ny] == '.'): continue
+            if not (0 <= nx < n and 0 <= ny < n and matrix[nx][ny] == '.'): continue
             queue.append((nx, ny, dist + 1))
             matrix[nx][ny] = 'X'  # mark as visited
     
