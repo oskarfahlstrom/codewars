@@ -11,13 +11,12 @@ def path_finder(s: str):
         x, y = queue.pop()  # DFS search using pop()
         matrix[x][y] = 'X'  # mark as visited
         
-        if (x, y) == (n-1, n-1):
-            return True
+        if (x, y) == (n-1, n-1): return True
         
         for dx, dy in [(-1, 0), (1, 0), (0, -1), (0, 1)]:
             nx, ny = x + dx, y + dy
-            if 0 <= nx < n and 0 <= ny < n and (nx, ny) and matrix[nx][ny] == '.':
-                queue.append((nx, ny))
+            if not (0 <= nx < n and 0 <= ny < n and (nx, ny) and matrix[nx][ny] == '.'): continue
+            queue.append((nx, ny))
     
     return False
 
