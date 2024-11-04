@@ -9,3 +9,7 @@ if __name__ == "__main__":
     assert i_am_here('') == [0, 0]
     assert i_am_here('RLrl') == [0, 0]
     assert i_am_here('r5L2l4') == [4, 3]
+    assert i_am_here('r5L2l4') == [0, 0]
+    assert i_am_here('10r5r0') == [-10, 5]
+    assert i_am_here('10r5r0') == [0, 0]
+    
