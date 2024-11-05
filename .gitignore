@@ -1,4 +1,5 @@
-#
+# ignore these files and folders
 .vscode/*
 *.exe
 resources/*
+venv/
