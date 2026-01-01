@@ -3,3 +3,4 @@
 *.exe
 resources/*
 venv/
+.venv/
